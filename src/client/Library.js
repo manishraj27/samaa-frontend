@@ -1,3 +1,5 @@
+// Library.js
+import axios from 'axios';
 import React, { useState, useEffect } from "react";
 import "./Library.css";
 import { IconContext } from "react-icons";
@@ -18,19 +20,21 @@ const Library = () => {
     window.location = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&redirect_uri=${redirectUri}&scope=user-read-private%20playlist-read-private`;
   };
 
+  const navigateToPlayer = (id) => {
+    const params = new URLSearchParams(window.location.hash.substring(1));
+    const token = params.get("access_token");
+    navigate("/player", { state: { id: id, accessToken: token } });
+  };
+
   const fetchPlaylists = async (token) => {
     try {
-      const response = await fetch("https://api.spotify.com/v1/me/playlists", {
+      const response = await axios.get("https://api.spotify.com/v1/me/playlists", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-      if (response.ok) {
-        const data = await response.json();
-        setPlaylists(data.items);
-      } else if (response.status === 404) {
-        setError("No playlists found.");
-        setPlaylists([]);
+      if (response.status === 200) {
+        setPlaylists(response.data.items);
       } else {
         setError("Failed to fetch playlists.");
         setPlaylists([]);
@@ -57,10 +61,6 @@ const Library = () => {
     }
   }, []);
 
-  const playPlaylist = (id) => {
-    navigate("/player", { state: { id: id } });
-  };
-
   return (
     <div className="screen-container">
       <header className="header">
@@ -85,7 +85,7 @@ const Library = () => {
                 <div
                   className="playlist-card"
                   key={playlist.id}
-                  onClick={() => playPlaylist(playlist.id)}
+                  onClick={() => navigateToPlayer(playlist.id)}
                 >
                   <img
                     src={

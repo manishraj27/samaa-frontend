@@ -1,0 +1,33 @@
+.about-container {
+  display: flex;
+  justify-content: center; /* Center the container horizontally */
+  align-items: center; /* Center the container vertically */
+  height: 50vh; /* Set the container height to 100% of viewport height */
+  margin: 0;
+}
+
+.about-table {
+  width: 50%;
+  border-collapse: collapse;
+  background-color: #2980b9; /* Blue background color for the table */
+}
+
+.about-table th,
+.about-table td {
+  border: 1px solid #dddddd;
+  padding: 8px;
+  text-align: left;
+  color: #ecf0f1; /* White text color */
+}
+
+.about-table th {
+  background-color: #2980b9; /* Dark blue background color for headers */
+}
+
+.about-table tr:hover {
+  background-color: #a9cce3; /* Light blue background color on hover */
+}
+
+.about-table tr.expanded {
+  background-color: #85c1e9; /* Lighter blue background color for expanded row */
+}
