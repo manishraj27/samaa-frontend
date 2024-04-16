@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function AdminHome() {
+export default function Analytics() {
   return (
     <div className='screen-container'>
-    Admin Home
+    Analytics page
   </div>
   )
 }

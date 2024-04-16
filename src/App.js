@@ -1,13 +1,17 @@
 import React from 'react'
-import NavBar from './client/NavBar'
 import MainNavBar from './main/MainNavBar'
+//import NavBar from './client/NavBar'
+//import AdminNavBar from './admin/AdminNavBar'
+
 
 
 
 export default function App() {
   return (
     <div>
-      <NavBar/>
+      <MainNavBar/>
+      {/* <AdminNavBar/> */}
+      {/* <NavBar/> */}
     </div>
   )
 }

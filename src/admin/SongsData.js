@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function AdminHome() {
+export default function SongsData() {
   return (
     <div className='screen-container'>
-    Admin Home
+    Songs data page
   </div>
   )
 }

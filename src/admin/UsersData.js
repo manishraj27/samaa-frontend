@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function AdminHome() {
+export default function UsersData() {
   return (
     <div className='screen-container'>
-    Admin Home
+    Users data page
   </div>
   )
 }
