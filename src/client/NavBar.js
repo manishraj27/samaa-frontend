@@ -11,32 +11,9 @@ import "./NavBar.css";
 import SideBar from "../components/sidebar/SideBar";
 
 export default function NavBar() {
-  // const [token,setToken] = useState("")
-
-  // useEffect(() => {
-  //   const token = window.localStorage.getItem("token")//after refreshing the page we don't have to take the token again and again it will take from storage
-  //   const hash = window.location.hash
-  //   //console.log(hash.split("&")[0].split('=')[1]) -- this is used to extract the access token
-  //   window.location.hash=""
-  //   if(!token&&hash){
-  //   const _token = hash.split("&")[0].split('=')[1]
-  //   window.localStorage.setItem("token",_token)
-  //   setToken(_token)
-  //   setClientToken(_token)
-  //   }
-  //   else{
-  //     setToken(token)
-  //     setClientToken(token)
-  //   }
-  // }, []);
-
+  
   return (
-    //!token ?
-    //<Login/>:
     <Router>
-      {/* <Route path="/" element={<LandingPage/>}/>
-    <Route path="/signin" element={<LogIn/>}/>
-    <Route path="/signup" element={<Register/>}/> */}
       <div className="main-body">
         <SideBar />
         <Routes>
