@@ -2,6 +2,6 @@ import React from 'react'
 
 export default function MainHome() {
   return (
-    <div>MainHome</div>
+    <div className='screen-container'>MainHome</div>
   )
 }

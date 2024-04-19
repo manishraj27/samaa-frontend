@@ -8,7 +8,7 @@ import UserLogin from './../client/UserLogin';
 import AdminLogin from './../admin/AdminLogin';
 import About from './../client/About';
 
-export default function MainNavBar() {
+export default function MainNavBar({onAdminLogin, onUserLogin}) {
   return (
     <Router>
       <div className="main-body">
@@ -16,8 +16,8 @@ export default function MainNavBar() {
         < Routes>
           <Route path="/mainhome" element={<MainHome />} />
           <Route path="/userregistration" element={<UserRegistration />} />
-          <Route path="/userlogin" element={<UserLogin />} />
-          <Route path="/adminlogin" element={<AdminLogin />} />
+          <Route path="/userlogin" element={<UserLogin onUserLogin={onUserLogin} />} />
+          <Route path="/adminlogin" element={<AdminLogin onAdminLogin={onAdminLogin} />} />
           <Route path="/about" element={<About />} />
         </Routes>
       </div>

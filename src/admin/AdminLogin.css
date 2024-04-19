@@ -3,7 +3,7 @@
   display: grid;
   place-items: center;
   width: 300px;
-  height: 500px;
+  height: 450px;
   padding: 25px;
   background-color: #0e1e29;
   box-shadow: 0px 1px 20px #00d5ff;
@@ -12,24 +12,18 @@
   left: 300px;
   top: 200px;
 }
-.success-message {
-  color: green;
-  font-size: 16px;
-  margin-top: 10px;
-}
 .error-message {
   color: red;
   font-size: 14px;
   margin-top: 5px;
 }
-
 #form-body {
   position: absolute;
-  top: 50%; /* Centered vertically */
+  top: 50px; /* Changed to top: 0 */
   right: 25px;
   left: 25px;
-  width: 300px; /* Increased width */
-  margin: auto;
+  width: 230px;
+  margin: auto; /* Changed to margin: auto */
 }
 
 #welcome-lines {
@@ -54,16 +48,22 @@
 }
 
 .form-inp {
-  padding: 10px 25px;
-  margin-bottom: 15px;
+  padding: 11px 25px;
   background: transparent;
-  border: 1px solid #00d5ff;
+  border: 1px solid #e3e3e3;
   line-height: 1;
   border-radius: 8px;
 }
 
-.form-inp input,
-.form-inp select {
+.form-inp:focus {
+  border: 1px solid #00d5ff;
+}
+
+.form-inp:first-child {
+  margin-bottom: 15px;
+}
+
+.form-inp input {
   width: 100%;
   background: none;
   font-size: 13.4px;
@@ -71,13 +71,10 @@
   border: none;
   padding: 0;
   margin: 0;
-  border-radius: 8px;
-  appearance: none;
-  outline: none;
 }
 
-.form-inp:focus-within {
-  border: 1px solid #00d5ff;
+.form-inp input:focus {
+  outline: none;
 }
 
 #submit-button-cvr {
@@ -102,11 +99,19 @@
 }
 
 #submit-button:hover {
+  transition: all ease-in-out 0.3s;
   background-color: #00d5ff;
   color: #161616;
+  cursor: pointer;
 }
 
-.error {
-  color: #ff0000;
+#forgot-pass {
+  text-align: center;
+  margin-top: 10px;
+}
+
+#forgot-pass a {
+  color: #868686;
   font-size: 12px;
+  text-decoration: none;
 }

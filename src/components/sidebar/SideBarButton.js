@@ -9,14 +9,32 @@ export default function SideBarButton(props) {
   const isActive = location.pathname === props.to;
 
   const btnClass = isActive ? "btn-body active" : "btn-body";
-  return (
-    <Link to={props.to}>
-      <div className={btnClass}>
+
+  const handleClick = () => {
+    if (props.onClick) {
+      props.onClick();
+    }
+  };
+
+  if (props.onClick) {
+    return (
+      <button className={btnClass} onClick={handleClick}>
         <IconContext.Provider value={{ size: "16px", className: "btn-icon" }}>
           {props.icon}
           <p className="btn-title">{props.title}</p>
         </IconContext.Provider>
-      </div>
-    </Link>
-  );
+      </button>
+    );
+  } else {
+    return (
+      <Link to={props.to}>
+        <div className={btnClass}>
+          <IconContext.Provider value={{ size: "16px", className: "btn-icon" }}>
+            {props.icon}
+            <p className="btn-title">{props.title}</p>
+          </IconContext.Provider>
+        </div>
+      </Link>
+    );
+  }
 }

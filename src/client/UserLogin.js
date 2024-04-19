@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
-export default function UserLogin() {
+import './userlogin.css'
+export default function UserLogin({onUserLogin}) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -18,10 +18,17 @@ export default function UserLogin() {
     setLoading(true);
     try {
       const response = await axios.post('http://localhost:3001/api/login', { email, password });
-      localStorage.setItem('token', response.data.authtoken); 
-      localStorage.setItem('user', JSON.stringify(response.data.data)); 
-      console.log('Login successful:', response.data.message);
-      navigate("/home");
+      if(response.status === 200) {
+        onUserLogin()
+        localStorage.setItem('token', response.data.authtoken); 
+        localStorage.setItem('user', JSON.stringify(response.data.data)); 
+        console.log('Login successful:', response.data.message);
+        navigate("/home");
+      }
+      else{
+        console.error('Login failed:', response.data.message);
+        setErrorMessage(response.data.message);
+      }
    
     } catch (error) {
       console.error('Login error:', error.response);
@@ -36,14 +43,47 @@ export default function UserLogin() {
   };
 
   return (
-    <div className='screen-container'>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-        <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-        <button type="submit" disabled={loading}>{loading ? 'Logging in...' : 'Login'}</button>
-      </form>
+    <div className="screen-container">
+      <div id="form-ui">
+        <form onSubmit={handleSubmit} id="form">
+          <div id="form-body">
+            <div id="welcome-lines">
+              <div id="welcome-line-1">Samaa</div>
+              <div id="welcome-line-2">Dive into nirvana</div>
+              <div id="welcome-line-2">Welcome Back!</div>
+            </div>
+            <div id="input-area">
+              <div className="form-inp">
+                <input
+                  placeholder="Email Address"
+                  type="text"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="form-inp">
+                <input
+                  placeholder="Password"
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+              </div>
+            </div>
+            <div id="submit-button-cvr">
+              <button id="submit-button" type="submit" disabled={loading}>
+                {loading ? 'Logging in...' : 'Login'}
+              </button>
+            </div>
+            {/* <div id="forgot-pass">
+              <a href="#">Forgot password?</a>
+            </div> */}
       {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

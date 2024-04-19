@@ -54,7 +54,7 @@ export default function ProgressCircle({
           y={30}
           width={2 * (size / 2 - 30)}
           height={2 * (size / 2 - 30)}
-          href="https://pngimg.com/uploads/vinyl/vinyl_PNG107.png"
+          href="vinyl_PNG107.png"
           clipPath="url(#myCircle)"
         />
         <image

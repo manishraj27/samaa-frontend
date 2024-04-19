@@ -5,8 +5,20 @@ import { PiSignOutBold } from "react-icons/pi";
 import { TbBrandGoogleAnalytics } from "react-icons/tb";
 import { FaUsersLine } from "react-icons/fa6";
 import { BiSolidMusic } from "react-icons/bi";
+import { useNavigate } from "react-router-dom";
 
 export default function SideBarAdmin() {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    console.log('Logging out');
+    localStorage.removeItem('adminAuthToken');
+    localStorage.removeItem('user');
+    localStorage.removeItem('isAdminLoggedIn');
+    navigate('/adminlogin');
+    window.location.reload();
+  };
+  
   return (
     <div className="sidebar-container">
       <img src="samaalogo.svg" alt="logo" className="logo-img" />
@@ -25,7 +37,7 @@ export default function SideBarAdmin() {
         <SideBarButton title="Songs Data" to="/songsdata" icon={<BiSolidMusic />} />
       </div>
       <div>
-        <SideBarButton title="Log Out" to="/logout" icon={<PiSignOutBold />} />
+        <SideBarButton title="Log Out" onClick={handleLogout} icon={<PiSignOutBold />} />
       </div>
     </div>
   );

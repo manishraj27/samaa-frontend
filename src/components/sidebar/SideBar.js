@@ -9,9 +9,21 @@ import { MdFavorite } from "react-icons/md";
 import { FaFire } from "react-icons/fa";
 import { MdFeedback } from "react-icons/md";
 import { PiSignOutBold } from "react-icons/pi";
+import { useNavigate } from "react-router-dom";
 
 export default function SideBar() {
   const [user, setUser] = useState(null);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    console.log('Logging out');
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
+    localStorage.removeItem('isUserLoggedIn');
+    navigate('/userlogin');
+    window.location.reload();
+  };
+  
 
   useEffect(() => {
     const userData = localStorage.getItem('user');
@@ -42,7 +54,7 @@ export default function SideBar() {
       </div>
       <div>
         <SideBarButton title="About" to="/about" icon={<MdFeedback/>}/>
-        <SideBarButton title="Log Out" to="/logout" icon={<PiSignOutBold/>}/>
+        <SideBarButton title="Log Out" onClick={handleLogout} icon={<PiSignOutBold/>}/>
       </div>
     </div>
   );
