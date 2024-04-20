@@ -23,7 +23,7 @@ export default function AdminLogin({onAdminLogin}) {
         throw new Error("You are not authorized to log in as admin.");
       }
       onAdminLogin();
-      localStorage.setItem("adminAuthToken", data.authtoken); // Store the token in local storage
+      localStorage.setItem("adminAuthToken", data.authToken); // Store the token in local storage
       localStorage.setItem("user", JSON.stringify(response.data.data));
       navigate("/adminhome");
     } catch (error) {
