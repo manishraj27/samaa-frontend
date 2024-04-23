@@ -9,6 +9,7 @@ import About from "./About";
 import Favourites from "./Favourites";
 import "./NavBar.css";
 import SideBar from "../components/sidebar/SideBar";
+import ErrorPage from "./ErrorPage";
 
 export default function NavBar() {
   
@@ -24,6 +25,7 @@ export default function NavBar() {
           <Route path="/trending" element={<Trending />} />
           <Route path="/favourites" element={<Favourites />} />
           <Route path="/about" element={<About />} />
+          <Route path="*" element={<ErrorPage />} />
         </Routes>
       </div>
     </Router>

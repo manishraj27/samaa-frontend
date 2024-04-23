@@ -22,6 +22,10 @@ export default function SideBarAdmin() {
   return (
     <div className="sidebar-container">
       <img src="samaalogo.svg" alt="logo" className="logo-img" />
+      <div margin>
+      <h2>ADMIN SPACE</h2>
+
+      </div>
       <div style={{ display: "flex", alignItems: "center" }}>
         <img src="profilelogo.png" alt="profile" className="profile-img" />
         <div>
@@ -33,7 +37,7 @@ export default function SideBarAdmin() {
       <div>
         <SideBarButton title="Home" to="/adminhome" icon={<IoHome />} />
         <SideBarButton title="Analytics" to="/analytics" icon={<TbBrandGoogleAnalytics />} />
-        <SideBarButton title="Users Data" to="/userdata" icon={<FaUsersLine />} />
+        <SideBarButton title="Users Data" to="/usersdata" icon={<FaUsersLine />} />
         <SideBarButton title="Songs Data" to="/songsdata" icon={<BiSolidMusic />} />
       </div>
       <div>

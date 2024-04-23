@@ -9,7 +9,7 @@ export default function App() {
 
   useEffect(() => {
     const adminToken = localStorage.getItem('adminAuthToken');
-    const userToken = localStorage.getItem('token');
+    const userToken = localStorage.getItem('userAuthToken');
   
     let adminLoggedIn = false;
     let userLoggedIn = false;
@@ -52,3 +52,4 @@ export default function App() {
     </div>
   )
 }
+

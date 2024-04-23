@@ -23,7 +23,7 @@ export default function UserLogin({onUserLogin}) {
       const response = await axios.post('http://localhost:3001/api/login', { email, password });
       if(response.status === 200) {
         onUserLogin()
-        localStorage.setItem('token', response.data.authToken); 
+        localStorage.setItem('userAuthToken', response.data.authToken); 
         localStorage.setItem('user', JSON.stringify(response.data.data)); 
         console.log('Login successful:', response.data.message);
         navigate("/home");

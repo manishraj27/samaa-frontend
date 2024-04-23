@@ -1,6 +1,7 @@
 .screen-container {
     width: calc(100% - 100px);
     height: 100%;
+    max-height: 100vh;
     background-color: #1e2a3e;
     border-radius: 30px;
     background-color: #1e2a3e;
@@ -11,6 +12,7 @@
         #233656 100px
       ),
       repeating-linear-gradient(#1e2a3e55, #1e2a3e);
+      overflow-y: auto;
   }
   
   .flex {

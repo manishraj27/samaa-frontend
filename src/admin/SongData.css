@@ -1,0 +1,63 @@
+.screen-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+  }
+  
+  .screen-container > div {
+	width: 80%;
+	max-width: 1200px;
+  }
+  
+  .songs_table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 20px;
+  }
+  
+  .songs_table th,
+  .songs_table td {
+	border: 1px solid #ddd;
+	padding: 8px;
+  }
+  
+  .songs_table th {
+	background-color: var(--blue-black);
+	color: var(--white);
+	text-align: left;
+  }
+  
+  .songs_table tr:nth-child(even) {
+	background-color: #f2f2f2;
+  }
+  
+  .songs_table tr:hover {
+	background-color: #ddd;
+  }
+  
+  .song_img {
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+  }
+  
+  .edit_btn,
+  .delete_btn {
+	cursor: pointer;
+	padding: 5px 10px;
+	margin-right: 5px;
+	border: none;
+	border-radius: 5px;
+  }
+  
+  .edit_btn {
+	background-color: var(--blue-black);
+	color: var(--white);
+  }
+  
+  .delete_btn {
+	background-color: var(--error);
+	color: var(--white);
+  }
+  

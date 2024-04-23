@@ -18,6 +18,7 @@ const Library = () => {
   const handleFetchPlaylists = () => {
     // Redirect user to Spotify authentication page
     window.location = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&redirect_uri=${redirectUri}&scope=user-read-private%20playlist-read-private`;
+  
   };
 
   const navigateToPlayer = (id) => {
