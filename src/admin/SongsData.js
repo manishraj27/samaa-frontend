@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Typography, Paper, Table, TableHead, TableBody, TableRow, TableCell, Button, Box } from '@mui/material';
 import { Delete as DeleteIcon, Edit as EditIcon, Add as AddIcon } from '@mui/icons-material';
 import SongForm from '../components/songForm/SongForm';
+import EditSongForm from '../components/songForm/EditSongForm';
 
 
 export default function SongsData() {
@@ -10,6 +11,7 @@ export default function SongsData() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [showForm, setShowForm] = useState(false);
+  const [editingSong, setEditingSong] = useState(null);
 
   const getAllSongs = async () => {
     try {
@@ -49,6 +51,20 @@ export default function SongsData() {
       setLoading(false);
     }
   };
+
+  const handleEditSong = (song) => {
+    setEditingSong(song);
+  };
+
+  const handleCloseEditForm = () => {
+    setEditingSong(null);
+    getAllSongs()
+  };
+
+  const handleCloseForm = () => {
+    setShowForm(false);
+    getAllSongs();
+  }
 
   return (
     <div className='screen-container'>
@@ -96,8 +112,9 @@ export default function SongsData() {
                     <TableCell><audio src={song.song} controls /></TableCell>
                     <TableCell>
                       <Button variant="contained" color="error" startIcon={<DeleteIcon />} onClick={() => handleDeleteSong(song._id)}>Delete</Button>
-                      <Button style={{ marginLeft: 8 }} variant="contained" color="primary" startIcon={<EditIcon />} onClick={() => console.log('Edit', song._id)}>Edit</Button>
+                      <Button style={{ marginLeft: 8 }} variant="contained" color="primary" startIcon={<EditIcon />} onClick={() => handleEditSong(song)}>Edit</Button>
                     </TableCell>
+
                   </TableRow>
                 ))}
               </TableBody>
@@ -105,7 +122,8 @@ export default function SongsData() {
           )}
         </Paper>
         <Paper elevation={3} style={{ width: 300, height: 0, marginRight: 10 }}>
-          {showForm && <SongForm onSongCreated={handleSongCreated} />}
+          {showForm && <SongForm onSongCreated={handleSongCreated} onClose={handleCloseForm} />}
+          {editingSong && <EditSongForm song={editingSong} onClose={handleCloseEditForm} />}
         </Paper>
       </Box>
     </div>

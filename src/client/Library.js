@@ -15,6 +15,38 @@ const Library = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
+
+  const fetchSammaPlaylist = async () => {
+    try {
+      const response = await axios.get("http://localhost:3001/api/playlists/user-playlists", {
+        headers: {
+          "x-auth-token": localStorage.getItem("userAuthToken"),
+        },
+      });
+      if (response.status === 200) {
+        // Assuming the response data structure is similar to Spotify's playlists
+        // Modify the data structure to match Spotify's playlists
+        const sammaPlaylists = response.data.data.map((playlist) => ({
+          id: playlist._id,
+          name: playlist.name,
+          images: playlist.img ? [{ url: playlist.img }] : [],
+          tracks: { total: playlist.songs.length }, 
+        }));
+        setPlaylists(sammaPlaylists);
+        console.log(sammaPlaylists);
+      } else {
+        setError("Failed to fetch user playlists.");
+        setPlaylists([]);
+      }
+    } catch (error) {
+      setError("Error fetching user playlists: " + error.message);
+      setPlaylists([]);
+    }
+  };
+  
+
+
+
   const handleFetchPlaylists = () => {
     // Redirect user to Spotify authentication page
     window.location = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&redirect_uri=${redirectUri}&scope=user-read-private%20playlist-read-private`;
@@ -24,7 +56,13 @@ const Library = () => {
   const navigateToPlayer = (id) => {
     const params = new URLSearchParams(window.location.hash.substring(1));
     const token = params.get("access_token");
-    navigate("/player", { state: { id: id, accessToken: token } });
+  
+    // Check if the token is available
+    if (token) {
+      navigate("/player", { state: { id: id, accessToken: token } });
+    } else {
+      navigate("/player", { state: { id: id } }); // No access token provided
+    }
   };
 
   const fetchPlaylists = async (token) => {
@@ -47,11 +85,7 @@ const Library = () => {
     setLoading(false);
   };
 
-  const fetchSammaPlaylist = () => {
-    // Display a message indicating that the section is yet to be developed
-    setError("Samma Playlist section is yet to be developed.");
-    setPlaylists([]);
-  };
+
   
 
   useEffect(() => {
@@ -92,7 +126,7 @@ const Library = () => {
                     src={
                       playlist.images.length > 0
                         ? playlist.images[0].url
-                        : "default_image_url.jpg"
+                        : "default_image_url.png"
                     }
                     className="playlist-image"
                     alt="Playlist-Art"

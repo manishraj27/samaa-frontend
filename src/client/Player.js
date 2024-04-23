@@ -15,7 +15,7 @@ export default function Player() {
   const [currentTrack, setCurrentTrack] = useState({});
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  //https://saavn.dev/api/songs
+
 
 
   useEffect(() => {
