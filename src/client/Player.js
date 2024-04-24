@@ -3,10 +3,10 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import "./Player.css";
 import { useLocation } from "react-router-dom";
-import SongCard from "../components/songCard/SongCard";
-import Queue from "../components/queue/Queue";
+// import SongCard from "../components/songCard/SongCard";
+// import Queue from "../components/queue/Queue";
 import AudioPlayer from "../components/audioPlayer/AudioPlayer";
-import Widgets from "../components/widgets/Widgets";
+// import Widgets from "../components/widgets/Widgets";
 
 
 export default function Player() {
@@ -20,7 +20,7 @@ export default function Player() {
 
   useEffect(() => {
     const fetchData = async () => {
-      if (location.state) {
+      if (location.state && location.state.source === "spotify") {
         const token = location.state.accessToken;
         if (token) {
           try {
@@ -33,7 +33,9 @@ export default function Player() {
               }
             );
             setTracks(response.data.items);
+            console.log("songs:",response.data.items);
             setCurrentTrack(response.data.items[0]?.track);
+            console.log("url:",response.data.items[0]?.track)
           } catch (error) {
             console.error("Error fetching playlist tracks:", error);
           }
@@ -46,9 +48,52 @@ export default function Player() {
     fetchData();
   }, [location.state]);
 
+  
   useEffect(() => {
-    setCurrentTrack(tracks[currentIndex]?.track);
+    if (tracks && tracks.length > 0 && currentIndex >= 0 && currentIndex < tracks.length) {
+      const currentTrackData = tracks[currentIndex];
+      const isSpotifyTrack = currentTrackData.hasOwnProperty('song');
+      setCurrentTrack(isSpotifyTrack ? currentTrackData.track : currentTrackData.song);
+    }
   }, [currentIndex, tracks]);
+  
+
+useEffect(() => {
+  const fetchSammaPlaylist = async () => {
+    if (location.state && location.state.source === "samma") {
+      const token = localStorage.getItem("userAuthToken");
+      if (token) {
+        try {
+          const response = await axios.get(
+            `http://localhost:3001/api/playlists/${location.state.id}`,
+            {
+              headers: {
+                "x-auth-token": token,
+              },
+            }
+          );
+          if (response.data.data.songs) {
+            const sammaTracks = response.data.data.songs
+            setTracks(sammaTracks);
+            console.log("songs array:",sammaTracks)
+            setCurrentTrack(sammaTracks[0]);
+            console.log("current song:",sammaTracks[0])
+            console.log("current song url:",sammaTracks[0].song )
+          } else {
+            console.error("Error: No playlist data found.");
+          }
+        } catch (error) {
+          console.error("Error fetching Samma playlist tracks:", error);
+        }
+      } else {
+        console.error("User authentication token not found.");
+      }
+    }
+  };
+
+  fetchSammaPlaylist();
+}, [location.state]); // Run this effect whenever location.state changes
+
 
   return (
     <div className="screen-container flex">
@@ -59,12 +104,11 @@ export default function Player() {
           currentIndex={currentIndex}
           setCurrentIndex={setCurrentIndex}
         />
-        <Widgets artistID={currentTrack?.album?.artists[0]?.id} />
       </div>
-      <div className="right-player-body">
+      {/* <div className="right-player-body">
         <SongCard album={currentTrack?.album} />
         <Queue tracks={tracks} setCurrentIndex={setCurrentIndex} />
-      </div>
+      </div> */}
     </div>
   );
 }

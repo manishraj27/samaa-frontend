@@ -3,11 +3,11 @@ import AlbumImage from "./albumImage";
 import AlbumInfo from "./albumInfo";
 import "./songCard.css";
 
-export default function SongCard({ album }) {
+export default function SongCard({ currentTrack }) {
   return (
     <div className="songCard-body flex">
-      <AlbumImage url={album?.images[0]?.url} />
-      <AlbumInfo album={album} />
+      <AlbumImage url={currentTrack.img} />
+      {/* <AlbumInfo album={album} /> */}
     </div>
   );
 }

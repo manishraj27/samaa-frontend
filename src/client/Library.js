@@ -4,7 +4,10 @@ import React, { useState, useEffect } from "react";
 import "./Library.css";
 import { IconContext } from "react-icons";
 import { AiFillPlayCircle } from "react-icons/ai";
+import { FaEllipsisV } from "react-icons/fa"; // Importing the three dots icon
 import { useNavigate } from "react-router-dom";
+import CreatePlaylist from '../components/playlistForm/CreatePlaylist';
+import EditPlaylist from '../components/playlistForm/EditPlaylis';
 
 const clientId = "9de33fca64244882a06ddec17de75c7e";
 const redirectUri = "http://localhost:3000/library";
@@ -14,8 +17,12 @@ const Library = () => {
   const [playlists, setPlaylists] = useState([]);
   const [error, setError] = useState("");
   const navigate = useNavigate();
-
-
+  const [showCreateForm, setShowCreateForm] = useState(false);
+  const [hoveredPlaylistId, setHoveredPlaylistId] = useState(null); 
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [showUpdateForm, setShowUpdateForm] = useState(false);
+  const [selectedPlaylistId, setSelectedPlaylistId] = useState(null);
+  
   const fetchSammaPlaylist = async () => {
     try {
       const response = await axios.get("http://localhost:3001/api/playlists/user-playlists", {
@@ -24,16 +31,13 @@ const Library = () => {
         },
       });
       if (response.status === 200) {
-        // Assuming the response data structure is similar to Spotify's playlists
-        // Modify the data structure to match Spotify's playlists
         const sammaPlaylists = response.data.data.map((playlist) => ({
           id: playlist._id,
           name: playlist.name,
           images: playlist.img ? [{ url: playlist.img }] : [],
-          tracks: { total: playlist.songs.length }, 
+          tracks: { total: playlist.songs.length },
         }));
         setPlaylists(sammaPlaylists);
-        console.log(sammaPlaylists);
       } else {
         setError("Failed to fetch user playlists.");
         setPlaylists([]);
@@ -43,25 +47,18 @@ const Library = () => {
       setPlaylists([]);
     }
   };
-  
-
-
 
   const handleFetchPlaylists = () => {
-    // Redirect user to Spotify authentication page
     window.location = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&redirect_uri=${redirectUri}&scope=user-read-private%20playlist-read-private`;
-  
   };
 
   const navigateToPlayer = (id) => {
     const params = new URLSearchParams(window.location.hash.substring(1));
     const token = params.get("access_token");
-  
-    // Check if the token is available
     if (token) {
-      navigate("/player", { state: { id: id, accessToken: token } });
+      navigate("/player", { state: { id: id, source: "spotify", accessToken: token } });
     } else {
-      navigate("/player", { state: { id: id } }); // No access token provided
+      navigate("/player", { state: { id: id, source: "samma" } });
     }
   };
 
@@ -85,9 +82,6 @@ const Library = () => {
     setLoading(false);
   };
 
-
-  
-
   useEffect(() => {
     const params = new URLSearchParams(window.location.hash.substring(1));
     const token = params.get("access_token");
@@ -96,56 +90,118 @@ const Library = () => {
     }
   }, []);
 
+  const toggleCreateForm = () => {
+    setShowCreateForm(!showCreateForm);
+    fetchSammaPlaylist();
+  };
+
+  const onCreatePlaylist = (newPlaylist) => {
+    setPlaylists((prevPlaylists) => [...prevPlaylists, newPlaylist]);
+  };
+
+  const handleDeletePlaylist = async (id) => {
+    try {
+      const response = await axios.delete(`http://localhost:3001/api/playlists/${id}`, {
+        headers: {
+          "x-auth-token": localStorage.getItem("userAuthToken"),
+        },
+      });
+      if (response.status === 200) {
+        // Remove the deleted playlist from the state
+        setPlaylists((prevPlaylists) => prevPlaylists.filter((playlist) => playlist.id !== id));
+        console.log("Playlist deleted successfully.");
+      } else {
+        console.error("Failed to delete playlist.");
+      }
+    } catch (error) {
+      console.error("Error deleting playlist:", error.message);
+    }
+  };
+
+  const handleUpdatePlaylist = (id) => {
+    setSelectedPlaylistId(id); // Set the selected playlist id
+    setShowUpdateForm(true); // Show the update form
+  };
+
+  if (showUpdateForm) {
+    return <EditPlaylist onClose={() => setShowUpdateForm(false)} playlistId={selectedPlaylistId} />;
+  }
   return (
     <div className="screen-container">
       <header className="header">
         <h1 className="header-title">Library</h1>
         <div className="header-buttons">
+          <button className="samma-button" onClick={fetchSammaPlaylist}>
+            Samma Playlist
+          </button>
           <button className="fetch-button" onClick={handleFetchPlaylists}>
             Fetch Playlists from Spotify
           </button>
-          <button className="samma-button" onClick={fetchSammaPlaylist}>
-            Samma Playlist
+          <button className="fetch-button" onClick={toggleCreateForm}>
+            Create Playlist
           </button>
         </div>
       </header>
       <div className="library-body">
-        {error && <p className="error-message">{error}</p>}
-        {loading ? (
-          <p>Loading...</p>
+        {showCreateForm ? (
+          <CreatePlaylist onClose={toggleCreateForm} onCreatePlaylist={onCreatePlaylist} />
         ) : (
           <>
-            {playlists.length > 0 ? (
-              playlists.map((playlist) => (
-                <div
-                  className="playlist-card"
-                  key={playlist.id}
-                  onClick={() => navigateToPlayer(playlist.id)}
-                >
-                  <img
-                    src={
-                      playlist.images.length > 0
-                        ? playlist.images[0].url
-                        : "default_image_url.png"
-                    }
-                    className="playlist-image"
-                    alt="Playlist-Art"
-                  />
-                  <p className="playlist-title">{playlist.name}</p>
-                  <p className="playlist-subtitle">
-                    {playlist.tracks.total} Songs
-                  </p>
-                  <div className="playlist-fade">
-                    <IconContext.Provider
-                      value={{ size: "50px", color: "#E99D72" }}
-                    >
-                      <AiFillPlayCircle />
-                    </IconContext.Provider>
-                  </div>
-                </div>
-              ))
+            {error && <p className="error-message">{error}</p>}
+            {loading ? (
+              <p>Loading...</p>
             ) : (
-              <p>No playlists found.</p>
+              <>
+                {playlists.length > 0 ? (
+                  playlists.map((playlist) => (
+                    <div
+                      className="playlist-card"
+                      key={playlist.id}
+                      onMouseEnter={() => setHoveredPlaylistId(playlist.id)}
+                      onMouseLeave={() => setHoveredPlaylistId(null)}
+                    >
+                      <img
+                        src={
+                          playlist.images.length > 0
+                            ? playlist.images[0].url
+                            : "default_image_url.png"
+                        }
+                        className="playlist-image"
+                        alt="Playlist-Art"
+                      />
+                      <p className="playlist-title">{playlist.name}</p>
+                      <p className="playlist-subtitle">
+                        {playlist.tracks.total} Songs
+                      </p>
+                      <div className="playlist-fade">
+                        <IconContext.Provider value={{ size: "50px", color: "#c1ffb6" }}>
+                          <AiFillPlayCircle
+                            key={playlist.id}
+                            onMouseEnter={() => setHoveredPlaylistId(playlist.id)}
+                            onMouseLeave={() => setHoveredPlaylistId(null)}
+                            onClick={() => navigateToPlayer(playlist.id)} />
+                        </IconContext.Provider>
+                      </div>
+                      {hoveredPlaylistId === playlist.id && (
+                        <div className="playlist-options">
+                          <FaEllipsisV values={{color:"#c1ffb6"}}
+                          onClick={() => setShowDropdown(true)} />
+                          {showDropdown && (
+                            <div className="playlist-dropdown">
+                              <ul>
+                                <li onClick={() => handleDeletePlaylist(playlist.id)}>Delete Playlist</li>
+                                <li onClick={() => handleUpdatePlaylist(playlist.id)}>Update Playlist</li>
+                              </ul>
+                            </div>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  ))
+                ) : (
+                  <p>No playlists found.</p>
+                )}
+              </>
             )}
           </>
         )}
