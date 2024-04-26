@@ -18,6 +18,7 @@ export default function NavBar() {
       <div className="main-body">
         <SideBar />
         <Routes>
+          <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
           <Route path="/library" element={<Library />} />
           <Route path="/feed" element={<Feed />} />

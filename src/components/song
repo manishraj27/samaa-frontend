@@ -1,0 +1,7 @@
+{/* 
+<FaPlay /> --> This is the play button icon
+<CiHeart /> --> This is the like icon before user liked it: it will be default
+<FaHeart /> --> This is the like icon after user liked it 
+<MdPlaylistAdd /> --> This is the add to playlist icon : it will be deafult
+<MdPlaylistAddCheck/> --> This is the add to playlist icon after user added it
+*/}
