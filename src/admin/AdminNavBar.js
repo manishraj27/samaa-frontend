@@ -6,6 +6,7 @@ import Analytics from './Analytics';
 import UsersData from './UsersData';
 import SongsData from './SongsData';
 import SideBarAdmin from '../components/sidebar/SideBarAdmin';
+import AdminErrorPage from './AdminErrorPage';
 
 export default function AdminNavBar() {
 
@@ -14,10 +15,12 @@ export default function AdminNavBar() {
         <div className='main-body'>
             <SideBarAdmin/>
             <Routes>
+                <Route path='/' element={<AdminHome/>}/>
                 <Route path='/adminhome' element={<AdminHome/>}/>
                 <Route path='/analytics' element={<Analytics/>}/>
                 <Route path='/usersdata' element={<UsersData/>}/>
                 <Route path='/songsdata' element={<SongsData/>}/>
+                <Route path='*' element={<AdminErrorPage/>}/>
             </Routes>
         </div>
     </Router>

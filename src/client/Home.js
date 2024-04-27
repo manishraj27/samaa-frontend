@@ -2,10 +2,14 @@ import React, { useEffect, useState } from 'react';
 import "./home.css";
 import axios from 'axios';
 import SongItem from '../components/songItem/SongItem';
+import Search from '../components/search/Search';
+import config from '../config';
+
 
 export default function Home() {
   const user = JSON.parse(localStorage.getItem('user'));
   const [name, setName] = useState(user ? user.name : '');
+ 
 
   useEffect(() => {
     if (user) {
@@ -21,7 +25,7 @@ export default function Home() {
   const getAllSongs = async () => {
     try {
       setLoading(true);
-      const { data } = await axios.get("http://localhost:3001/api/songs");
+      const { data } = await axios.get(`${config.samaa_api}/api/songs`);
       setSongs(data.data);
       console.log(data.data);
     } catch (error) {
@@ -34,7 +38,6 @@ export default function Home() {
   useEffect(() => {
     getAllSongs();
   }, []);
-
 
 
 
@@ -78,8 +81,10 @@ export default function Home() {
       </div>
       </div>
 
-        <div className='welcomeAndPlaylistbody'>
-        <h2>hi hffffffffffffffffffff</h2>
+        <div className='right-search-body'>
+          <div className='search-body'>
+          <Search/>
+          </div>
         </div>
       </div>
     </div>

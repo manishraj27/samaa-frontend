@@ -1,0 +1,129 @@
+.searchBox {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    background: #2f3640;
+    border-radius: 50px;
+    position: fixed;
+    top: 20px;
+    left: 0;
+    width: 90%;
+    height: 60px;
+    padding: 0 20px;
+    z-index: 1000;
+  }
+  
+  .searchButton {
+    color: white;
+    position: absolute;
+    right: 8px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--gradient-2, linear-gradient(90deg, #2AF598 0%, #009EFD 100%));
+    border: 0;
+    display: inline-block;
+    transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+  }
+  
+  /* Hover effect */
+  .searchButton:hover {
+    color: #fff;
+    background-color: #1A1A1A;
+    box-shadow: rgba(0, 0, 0, 0.5) 0 10px 20px;
+    transform: translateY(-3px);
+  }
+  
+  /* Button pressing effect */
+  .searchButton:active {
+    box-shadow: none;
+    transform: translateY(0);
+  }
+  
+  .searchInput {
+    border: none;
+    background: none;
+    outline: none;
+    color: white;
+    font-size: 15px;
+    padding: 24px 46px 24px 26px;
+  }
+  
+  .searchResults {
+    margin-top: 80px;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    max-width: 100%;
+    height: auto;
+  }
+  .searchResults {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .song-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+  .song-card {
+    width: 200px;
+    background: #b4e4e1; /* Fallback color */
+    background: linear-gradient(135deg, #b4f4f4, #f5d5f8); /* Gradient */
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .song-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .card-image {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px 10px 0 0;
+  }
+  
+  .song-image {
+    width: 100%;
+    height: auto;
+    border-radius: 10px 10px 0 0;
+  }
+  
+  .card-details {
+    padding: 10px;
+  }
+  
+  .card-details h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .card-details p {
+    margin: 5px 0;
+    font-size: 14px;
+  }
+  
+  .card-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+  }
+  
+  .play-icon {
+    cursor: pointer;
+    color: #7a16de;
+  }
+  
+  .play-icon:hover {
+    color: #31e8e8 ;
+  }

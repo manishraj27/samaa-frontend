@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from 'axios';
 import styles from "./styles.module.css";
 import FileInput from './../fileInput/FileInput';
+import config from "../../config";
 
 const CreatePlaylist = ({ onClose }) => {
   const [data, setData] = useState({
@@ -25,7 +26,7 @@ const CreatePlaylist = ({ onClose }) => {
     try {
       const authToken = localStorage.getItem("userAuthToken");
       const user = JSON.parse(localStorage.getItem("user"));
-      const url = "http://localhost:3001/api/playlists";
+      const url = `${config.samaa_api}/api/playlists`;
       const requestData = {
         ...data,
         user: user._id

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import FileInput from '../fileInput/FileInput';
 import styles from './styles.module.css';
+import config from '../../config';
 
 const EditPlaylist = ({ onClose, playlistId }) => {
   const [formData, setFormData] = useState({
@@ -16,7 +17,7 @@ const EditPlaylist = ({ onClose, playlistId }) => {
     const fetchPlaylist = async () => {
       try {
         const authToken = localStorage.getItem('userAuthToken');
-        const response = await axios.get(`http://localhost:3001/api/playlists/${playlistId}`, {
+        const response = await axios.get(`${config.samaa_api}/api/playlists/${playlistId}`, {
           headers: {
             'x-auth-token': authToken
           }
@@ -50,7 +51,7 @@ const EditPlaylist = ({ onClose, playlistId }) => {
       formDataToSend.append('desc', formData.desc);
       formDataToSend.append('img', formData.img);
 
-      const response = await axios.put(`http://localhost:3001/api/playlists/edit/${playlistId}`, formDataToSend, {
+      const response = await axios.put(`${config.samaa_api}/api/playlists/edit/${playlistId}`, formDataToSend, {
         headers: {
           'x-auth-token': authToken
         }

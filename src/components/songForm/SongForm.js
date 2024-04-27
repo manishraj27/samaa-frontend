@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from 'axios';
 import styles from "./styles.module.css";
 import FileInput from './../fileInput/FileInput';
+import config from "../../config";
 
 const SongForm = ({ onClose }) => {
   const [data, setData] = useState({
@@ -25,7 +26,7 @@ const SongForm = ({ onClose }) => {
     e.preventDefault();
     try {
       const authToken = localStorage.getItem("adminAuthToken");
-      const url = "http://localhost:3001/api/songs";
+      const url = `${config.samaa_api}/api/songs`;
       const { data: res } = await axios.post(url, data, {
         headers: {
           "x-auth-token": authToken,

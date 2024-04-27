@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './userlogin.css'
+import config from '../config';
 
 
 
-export default function UserLogin({onUserLogin}) {
+export default function UserLogin({ onUserLogin }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -20,19 +21,19 @@ export default function UserLogin({onUserLogin}) {
     }
     setLoading(true);
     try {
-      const response = await axios.post('http://localhost:3001/api/login', { email, password });
-      if(response.status === 200) {
+      const response = await axios.post(`${config.samaa_api}/api/login`, { email, password });
+      if (response.status === 200) {
         onUserLogin()
-        localStorage.setItem('userAuthToken', response.data.authToken); 
-        localStorage.setItem('user', JSON.stringify(response.data.data)); 
+        localStorage.setItem('userAuthToken', response.data.authToken);
+        localStorage.setItem('user', JSON.stringify(response.data.data));
         console.log('Login successful:', response.data.message);
         navigate("/home");
       }
-      else{
+      else {
         console.error('Login failed:', response.data.message);
         setErrorMessage(response.data.message);
       }
-   
+
     } catch (error) {
       console.error('Login error:', error.response);
       if (error.response && error.response.data && error.response.data.message) {
@@ -56,25 +57,25 @@ export default function UserLogin({onUserLogin}) {
               <div id="welcome-line-2">Welcome Back!</div>
             </div>
             <div id="input-area">
-              <div className="form-inp">
-                <input
-                  placeholder="Email Address"
-                  type="text"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
-              </div>
-              <div className="form-inp">
-                <input
-                  placeholder="Password"
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                />
-              </div>
+              <input
+                className="form-input"
+                placeholder="Email Address"
+                type="text"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+              
+              <input
+                className="form-input"
+                placeholder="Password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
             </div>
+
             <div id="submit-button-cvr">
               <button id="submit-button" type="submit" disabled={loading}>
                 {loading ? 'Logging in...' : 'Login'}
@@ -83,7 +84,7 @@ export default function UserLogin({onUserLogin}) {
             {/* <div id="forgot-pass">
               <a href="#">Forgot password?</a>
             </div> */}
-      {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
+            {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
           </div>
         </form>
       </div>

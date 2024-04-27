@@ -5,6 +5,9 @@ import { FaHeart } from "react-icons/fa";
 import { MdPlaylistAdd } from "react-icons/md";
 import { MdPlaylistAddCheck } from "react-icons/md";
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; 
+import config from '../../config';
+
 
 const SongItem = ({ song }) => {
   const [isLiked, setIsLiked] = useState(false);
@@ -12,11 +15,17 @@ const SongItem = ({ song }) => {
   const [error, setError] = useState("");
   const [selectedPlaylist, setSelectedPlaylist] = useState(null);
   const [clicked, setClicked] = useState(false);
+  const navigate = useNavigate();
 
   const handleClick = () => {
     handleAddToPlaylist();
     setClicked(false);
   };
+
+  const handlePlay = () => {
+    navigate('/player', { state: { songId: song._id } });
+  };
+
 
   useEffect(() => {
     fetchSammaPlaylist();
@@ -30,13 +39,13 @@ const SongItem = ({ song }) => {
         return;
       }
 
-      const config = {
+      const configx = {
         headers: {
           'x-auth-token': authToken
         }
       };
 
-      const response = await axios.put(`http://localhost:3001/api/songs/like/${song._id}`, null, config);
+      const response = await axios.put(`${config.samaa_api}/api/songs/like/${song._id}`, null, configx);
       if (response.status === 200) {
         setIsLiked(!isLiked);
         console.log('Song liked:', response.data);
@@ -50,7 +59,7 @@ const SongItem = ({ song }) => {
 
   const fetchSammaPlaylist = async () => {
     try {
-      const response = await axios.get("http://localhost:3001/api/playlists/user-playlists", {
+      const response = await axios.get(`${config.samaa_api}/api/playlists/user-playlists`, {
         headers: {
           "x-auth-token": localStorage.getItem("userAuthToken"),
         },
@@ -87,7 +96,7 @@ const SongItem = ({ song }) => {
         }
       };
 
-      const response = await axios.put(`http://localhost:3001/api/playlists/add-song`, {
+      const response = await axios.put(`${config.samaa_api}/api/playlists/add-song`, {
         playlistId: selectedPlaylist,
         songId: song._id
       }, config);
@@ -119,8 +128,9 @@ const SongItem = ({ song }) => {
               <p className="artist">{song.artist}</p>
             </td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <td className='control-icons'>
-              <FaPlay size={18} color='cyan' /> {/* this is Play Icon */} &nbsp;&nbsp;
-              {isLiked ? <CiHeart size={20} color='cyan' onClick={handleLikeToggle} /> : <FaHeart size={25} color='cyan' onClick={handleLikeToggle} />} &nbsp;&nbsp; {/* Like Icon */}
+            <FaPlay size={18} color='cyan' onClick={handlePlay} /> {/* this is Play Icon */} &nbsp;&nbsp;
+
+              {isLiked ? <CiHeart size={20} color='cyan' onClick={handleLikeToggle} /> : <FaHeart size={22} color='cyan' onClick={handleLikeToggle} />} &nbsp;&nbsp; {/* Like Icon */}
               <div className="dropdown">
                 <MdPlaylistAdd color='cyan' size={30} onClick={fetchSammaPlaylist} />&nbsp;&nbsp; 
                 {playlists.length > 0 && (

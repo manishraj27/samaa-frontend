@@ -19,13 +19,18 @@
   .entry-title {
     font-weight: 700;
     font-size: 16px;
-    color: #c9d0e3;
+    color: #a9f8df;
     margin: 0px 0px 5px;
   }
   
   .entry-subtitle {
     font-weight: 400;
     font-size: 12px;
-    color: #c4d0e37c;
+    color: #8bf4f87c;
     margin: 0;
+  }
+
+  .play-icon {
+    cursor: pointer;
+    
   }

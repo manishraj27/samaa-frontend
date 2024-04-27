@@ -4,6 +4,7 @@ import { Typography, Paper, Table, TableHead, TableBody, TableRow, TableCell, Bu
 import { Delete as DeleteIcon, Edit as EditIcon, Add as AddIcon } from '@mui/icons-material';
 import SongForm from '../components/songForm/SongForm';
 import EditSongForm from '../components/songForm/EditSongForm';
+import config from '../config';
 
 
 export default function SongsData() {
@@ -16,7 +17,7 @@ export default function SongsData() {
   const getAllSongs = async () => {
     try {
       setLoading(true);
-      const { data } = await axios.get("http://localhost:3001/api/songs");
+      const { data } = await axios.get(`${config.samaa_api}/api/songs`);
       setSongs(data.data);
     } catch (error) {
       setError('Failed to fetch songs');
@@ -38,7 +39,7 @@ export default function SongsData() {
     try {
       setLoading(true);
       const authToken = localStorage.getItem('adminAuthToken');
-      await axios.delete(`http://localhost:3001/api/songs/${id}`, {
+      await axios.delete(`${config.samaa_api}/api/songs/${id}`, {
         headers: {
           'x-auth-token': authToken
         }

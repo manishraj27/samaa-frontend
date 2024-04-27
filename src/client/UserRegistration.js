@@ -3,6 +3,7 @@ import axios from 'axios';
 import Joi from 'joi';
 import passwordComplexity from 'joi-password-complexity';
 import './glass.css';
+import config from '../config';
 
 const UserRegistration = () => {
   const [formData, setFormData] = useState({
@@ -45,7 +46,7 @@ const UserRegistration = () => {
     };
   
     try {
-      const response = await axios.post('http://localhost:3001/api/users/', formData);
+      const response = await axios.post(`${config.samaa_api}/api/users/`, formData);
       if (response.status === 200) {
         console.log('Registration successful:', response.data.message);
         setFormData({

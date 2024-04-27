@@ -1,12 +1,14 @@
-// Player.js
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import "./Player.css";
 import { useLocation } from "react-router-dom";
-// import SongCard from "../components/songCard/SongCard";
-// import Queue from "../components/queue/Queue";
+import SongCard from "../components/songCard/SongCard";
+import Queue from "../components/queue/Queue";
 import AudioPlayer from "../components/audioPlayer/AudioPlayer";
-// import Widgets from "../components/widgets/Widgets";
+import Widgets from "../components/widgets/Widgets";
+import config from "../config";
+
+
 
 
 export default function Player() {
@@ -14,9 +16,26 @@ export default function Player() {
   const [tracks, setTracks] = useState([]);
   const [currentTrack, setCurrentTrack] = useState({});
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [getAllSongs, setGetAllSongs] = useState([]);
+const [loading, setLoading] = useState(false);
+const [error, setError] = useState(null);
 
 
-
+  useEffect(() => {
+    const getAllSongs = async () => {
+      try {
+        setLoading(true);
+        const { data } = await axios.get(`${config.samaa_api}/api/songs`);
+        setGetAllSongs(data.data);
+        console.log(data.data);
+      } catch (error) {
+        setError('Failed to fetch songs');
+      } finally {
+        setLoading(false);
+      }
+    };
+    getAllSongs();
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -48,11 +67,27 @@ export default function Player() {
     fetchData();
   }, [location.state]);
 
-  
+  useEffect(() => {
+    const fetchSamaaSongData = async () => {
+      if (location.state && location.state.songId) {
+        const songId = location.state.songId;
+        const songIndex = getAllSongs.findIndex(song => song._id === songId);
+        if (songIndex !== -1) {
+          setTracks(getAllSongs);
+          setCurrentTrack(getAllSongs[songIndex]);
+          setCurrentIndex(songIndex);
+          console.log("Song Image:", getAllSongs[songIndex].img)
+          console.log("datafz:", 0)
+        }
+      }
+    };
+    fetchSamaaSongData();
+  }, [location.state, getAllSongs]);
+
   useEffect(() => {
     if (tracks && tracks.length > 0 && currentIndex >= 0 && currentIndex < tracks.length) {
       const currentTrackData = tracks[currentIndex];
-      const isSpotifyTrack = currentTrackData.hasOwnProperty('song');
+      const isSpotifyTrack = currentTrackData.hasOwnProperty('track');
       setCurrentTrack(isSpotifyTrack ? currentTrackData.track : currentTrackData.song);
     }
   }, [currentIndex, tracks]);
@@ -65,7 +100,7 @@ useEffect(() => {
       if (token) {
         try {
           const response = await axios.get(
-            `http://localhost:3001/api/playlists/${location.state.id}`,
+            `${config.samaa_api}/api/playlists/${location.state.id}`,
             {
               headers: {
                 "x-auth-token": token,
@@ -78,6 +113,7 @@ useEffect(() => {
             console.log("songs array:",sammaTracks)
             setCurrentTrack(sammaTracks[0]);
             console.log("current song:",sammaTracks[0])
+            console.log("current song image:",sammaTracks[0].img )
             console.log("current song url:",sammaTracks[0].song )
           } else {
             console.error("Error: No playlist data found.");
@@ -104,11 +140,13 @@ useEffect(() => {
           currentIndex={currentIndex}
           setCurrentIndex={setCurrentIndex}
         />
+        <Widgets/>
       </div>
-      {/* <div className="right-player-body">
-        <SongCard album={currentTrack?.album} />
+      <div className="right-player-body">
+        <SongCard total={tracks} currentIndex={currentIndex}/>
         <Queue tracks={tracks} setCurrentIndex={setCurrentIndex} />
-      </div> */}
+
+      </div>
     </div>
   );
 }

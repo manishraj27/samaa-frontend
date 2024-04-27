@@ -8,9 +8,10 @@ import { FaEllipsisV } from "react-icons/fa"; // Importing the three dots icon
 import { useNavigate } from "react-router-dom";
 import CreatePlaylist from '../components/playlistForm/CreatePlaylist';
 import EditPlaylist from '../components/playlistForm/EditPlaylis';
+import config from '../config';
 
 const clientId = "9de33fca64244882a06ddec17de75c7e";
-const redirectUri = "http://localhost:3000/library";
+const redirectUri = `${config.samaa_api}/library`;
 
 const Library = () => {
   const [loading, setLoading] = useState(false);
@@ -25,7 +26,7 @@ const Library = () => {
   
   const fetchSammaPlaylist = async () => {
     try {
-      const response = await axios.get("http://localhost:3001/api/playlists/user-playlists", {
+      const response = await axios.get(`${config.samaa_api}/api/playlists/user-playlists`, {
         headers: {
           "x-auth-token": localStorage.getItem("userAuthToken"),
         },
@@ -101,7 +102,7 @@ const Library = () => {
 
   const handleDeletePlaylist = async (id) => {
     try {
-      const response = await axios.delete(`http://localhost:3001/api/playlists/${id}`, {
+      const response = await axios.delete(`${config.samaa_api}/api/playlists/${id}`, {
         headers: {
           "x-auth-token": localStorage.getItem("userAuthToken"),
         },
@@ -162,7 +163,7 @@ const Library = () => {
                     >
                       <img
                         src={
-                          playlist.images.length > 0
+                          playlist.images.length >0
                             ? playlist.images[0].url
                             : "default_image_url.png"
                         }
@@ -171,7 +172,7 @@ const Library = () => {
                       />
                       <p className="playlist-title">{playlist.name}</p>
                       <p className="playlist-subtitle">
-                        {playlist.tracks.total} Songs
+                        {playlist.tracks.total -1} Songs
                       </p>
                       <div className="playlist-fade">
                         <IconContext.Provider value={{ size: "50px", color: "#c1ffb6" }}>

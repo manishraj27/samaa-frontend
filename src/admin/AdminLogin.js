@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios"; // Make sure to install axios: npm install axios
 import { useNavigate } from "react-router-dom";
 import "./AdminLogin.css";
+import config from "../config";
 
 export default function AdminLogin({onAdminLogin}) {
   const [email, setEmail] = useState("");
@@ -14,7 +15,7 @@ export default function AdminLogin({onAdminLogin}) {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:3001/api/login/", {
+      const response = await axios.post(`${config.samaa_api}/api/login/`, {
         email,
         password,
       });

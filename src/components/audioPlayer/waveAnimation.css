@@ -10,7 +10,7 @@
     transform: scale(0.4);
     height: 100%;
     width: var(--boxSize);
-    background: linear-gradient(40deg,#364562 20%, #C96850 100%) no-repeat;
+    background: linear-gradient(40deg,#30e1f1 20%, #cd3bee 100%) no-repeat;
     border-radius: 18px;
   }
   

@@ -5,9 +5,9 @@ export default function About() {
   const [expandedRow, setExpandedRow] = useState(null);
 
   const data = [
-    { id: 1, question: 'What is Samaa?', answer: 'Samaa is a platform for XYZ.' },
-    { id: 2, question: 'How to use Samaa?', answer: 'You can use Samaa by following these steps...' },
-    { id: 3, question: 'Why choose Samaa?', answer: 'Samaa offers unique features such as...' }
+    { id: 1, question: 'What is Samaa?', answer: 'Samaa is a platform for music streaming.' },
+    { id: 2, question: 'What is tech stack?', answer: 'Samaa is MERN STACK PROJECT under our SDP 2' },
+    { id: 3, question: 'Team Members', answer: 'K Manish, Manish Raj, Mukund Maheswari' }
   ];
 
   const handleRowClick = (id) => {

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import styles from "./styles.module.css";
+import config from "../../config";
 const EmailVerify = () => {
     const [validUrl, setValidUrl] = useState(false);
     const [loading, setLoading] = useState(true);
@@ -11,7 +12,7 @@ const EmailVerify = () => {
     useEffect(() => {
         const verifyEmailUrl = async () => {
             try {
-                const url = `http://localhost:3001/api/users/${param.id}/verify/${param.token}`;
+                const url = `${config.samaa_api}/api/users/${param.id}/verify/${param.token}`;
                 const response = await axios.get(url);
                 const { data } = response;
                 if (data.message === "Email verified successfully") {

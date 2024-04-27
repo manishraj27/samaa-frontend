@@ -47,12 +47,14 @@
     margin-top: 40px;
   }
   
-  .form-inp {
-    padding: 11px 25px;
+  .form-input {
+    padding: 11px 33px;
     background: transparent;
-    border: 1px solid #e3e3e3;
+    border: 1px solid #27d9ea;
     line-height: 1;
     border-radius: 8px;
+    margin-bottom: 20px;
+    color: #2efffc;
   }
   
   .form-inp:focus {

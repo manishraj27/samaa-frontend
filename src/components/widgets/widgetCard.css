@@ -21,7 +21,7 @@
   .widget-title {
     font-size: 18px;
     font-weight: 800;
-    color: #c4d0e3;
+    color: #ef5770;
   }
   
   .widget-fade {
@@ -33,8 +33,8 @@
     border-radius: 30px;
     background: linear-gradient(
       180deg,
-      rgba(54, 69, 98, 0) 10%,
-      rgba(54, 69, 98, 1) 100%
+      rgba(22, 252, 252, 0.922) 10%,
+      rgb(98, 54, 98) 100%
     );
     opacity: 0;
     transition: 0.5s ease-in-out;

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Typography, Paper, Table, TableHead, TableBody, TableRow, TableCell, Button, Box } from '@mui/material';
+import config from '../config';
 
 export default function UsersData() {
   const [users, setUsers] = useState([]);
@@ -12,7 +13,7 @@ export default function UsersData() {
     try {
       setLoading(true);
       const authToken = localStorage.getItem('adminAuthToken');
-      const { data } = await axios.get("http://localhost:3001/api/users", {
+      const { data } = await axios.get(`${config.samaa_api}/api/users`, {
         headers: {
           'x-auth-token': authToken
         }
@@ -34,7 +35,7 @@ export default function UsersData() {
     try {
       setLoading(true);
       const authToken = localStorage.getItem('adminAuthToken');
-      await axios.delete(`http://localhost:3001/api/users/${id}`, {
+      await axios.delete(`${config.samaa_api}/api/users/${id}`, {
         headers: {
           'x-auth-token': authToken
         }

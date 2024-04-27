@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function ErrorPage() {
+export default function AdminErrorPage() {
   return (
     <div className='screen-container'>
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>

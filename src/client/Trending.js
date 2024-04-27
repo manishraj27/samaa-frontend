@@ -44,7 +44,6 @@ const Trending = () => {
   }, []);
 
   const navigateToPlayer = (id) => {
-    // Assuming you have a route for the player component
     navigate("/player", { state: { id: id } });
   };
 
@@ -52,10 +51,11 @@ const Trending = () => {
     <div className="screen-container">
       <header className="header">
         <h1 className="header-title">Trending Playlists</h1>
+        <h1>Fetched From Saavn Api (Yet To Implement)</h1>
       </header>
       <div className="library-body">
         {loading ? (
-          <p>Loading...</p>
+          <p color='white'>Loading...</p>
         ) : error ? (
           <p className="error-message">{error}</p>
         ) : (
