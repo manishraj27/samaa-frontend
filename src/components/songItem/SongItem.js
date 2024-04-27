@@ -90,7 +90,7 @@ const SongItem = ({ song }) => {
         return;
       }
 
-      const config = {
+      const configy = {
         headers: {
           'x-auth-token': authToken
         }
@@ -99,7 +99,7 @@ const SongItem = ({ song }) => {
       const response = await axios.put(`${config.samaa_api}/api/playlists/add-song`, {
         playlistId: selectedPlaylist,
         songId: song._id
-      }, config);
+      }, configy);
       if (response.status === 200) {
         // Update UI to show the song is added to playlist
         console.log('Song added to playlist:', response.data);
