@@ -11,7 +11,7 @@ import EditPlaylist from '../components/playlistForm/EditPlaylis';
 import config from '../config';
 
 const clientId = "9de33fca64244882a06ddec17de75c7e";
-const redirectUri = ` http://localhost:3000/library`;
+const redirectUri = `http://localhost:3000/library`;
 
 const Library = () => {
   const [loading, setLoading] = useState(false);
