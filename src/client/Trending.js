@@ -16,7 +16,7 @@ const Trending = () => {
     try {
       const response = await axios.get('https://saavn.dev/api/search/playlists', {
         params: {
-          query: 'trending',
+          query: 'trending playlists',
         },
       });
       if (response.data.success) {
@@ -52,6 +52,7 @@ const Trending = () => {
     <div className="screen-container">
       <header className="header">
         <h1 className="header-title">Trending Playlists</h1>
+        <h2 className='header-title'>Saavn Music</h2>
       </header>
       <div className="library-body">
         {loading ? (
