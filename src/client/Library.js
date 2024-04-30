@@ -11,7 +11,7 @@ import EditPlaylist from '../components/playlistForm/EditPlaylis';
 import config from '../config';
 
 const clientId = "9de33fca64244882a06ddec17de75c7e";
-const redirectUri = `https://samaa-frontend.vercel.app/library`;
+const redirectUri = `https://samavibes.vercel.app/library`;
 
 const Library = () => {
   const [loading, setLoading] = useState(false);
