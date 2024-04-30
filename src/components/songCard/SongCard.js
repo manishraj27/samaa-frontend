@@ -17,9 +17,21 @@ export default function SongCard({ total, currentIndex }) {
     return <div>No song data available</div>;
   }
 
+  let albumImageUrl;
+  if (currentSong.img) {
+    // For Samaa
+    albumImageUrl = currentSong.img;
+  } else if (currentSong.image && currentSong.image.length > 2) {
+    // For Saavn
+    albumImageUrl = currentSong.image[2].url;
+  } else {
+    albumImageUrl = "/frontendapp/samaa/public/default_image_url.png"; 
+  }
+
+
   return (
     <div className="songCard-body flex">
-      <AlbumImage url={currentSong.img} />
+      <AlbumImage url={albumImageUrl} />
       <AlbumInfo tt={tt} ci={ci} />
     </div>
   );

@@ -17,9 +17,19 @@ export default function NewAudioPlayer({
   const isReady = useRef(false);
 
   useEffect(() => {
-    const audioSrc = total[currentIndex]?.song;
-    audioRef.current.src = audioSrc;
-    audioRef.current.load();
+    
+    const setAudioSource = () => {
+      if (total[currentIndex]?.downloadUrl) {
+        // Saavn song
+        audioRef.current.src = total[currentIndex]?.downloadUrl[4]?.url;
+      } else {
+        // Samaa song
+        audioRef.current.src = total[currentIndex]?.song;
+      }
+      
+    };
+  
+    setAudioSource();
 
     const onCanPlayThrough = () => {
       isReady.current = true;
@@ -111,13 +121,24 @@ export default function NewAudioPlayer({
   const { duration } = audioRef.current;
   const currentPercentage = duration ? (trackProgress / duration) * 100 : 0;
 
+  let circleImage;
+  if(total[currentIndex]?.img){
+    circleImage = total[currentIndex]?.img;
+  }
+  else if(total[currentIndex]?.image && total[currentIndex]?.image.length > 2){
+    circleImage = total[currentIndex]?.image[2]?.url;
+  }
+  else{
+    circleImage = "/frontendapp/samaa/public/default_image_url.png";
+  }
+
   return (
     <div className="player-body flex">
       <div className="player-left-body">
         <ProgressCircle
           percentage={currentPercentage}
           isPlaying={isPlaying}
-          image={total[currentIndex]?.img}
+          image={circleImage}
           size={300}
           color="#C96850"
         />

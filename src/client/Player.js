@@ -77,7 +77,6 @@ const [error, setError] = useState(null);
           setCurrentTrack(getAllSongs[songIndex]);
           setCurrentIndex(songIndex);
           console.log("Song Image:", getAllSongs[songIndex].img)
-          console.log("datafz:", 0)
         }
       }
     };
@@ -129,6 +128,46 @@ useEffect(() => {
 
   fetchSammaPlaylist();
 }, [location.state]); // Run this effect whenever location.state changes
+
+
+
+
+
+
+
+useEffect(() => {
+  const fetchSaavnPlaylist = async () => {
+    if (location.state && location.state.source === "saavn") {
+      try {
+        setLoading(true);
+        const response = await axios.get(`https://saavn.dev/api/playlists`, {
+          params: {
+            id: location.state.id,
+          },
+        });
+        if (response.data.success) {
+          const saavnPlaylist = response.data.data;
+          setTracks(saavnPlaylist.songs);
+          setCurrentTrack(saavnPlaylist.songs[0]);
+          console.log("Saavn playlist songs:", saavnPlaylist.songs);
+        } else {
+          setError("Failed to fetch Saavn playlist.");
+        }
+      } catch (error) {
+        setError("Error fetching Saavn playlist: " + error.message);
+      } finally {
+        setLoading(false);
+      }
+    }
+  };
+
+  fetchSaavnPlaylist();
+}, [location.state]);
+
+// No need to modify the return statement, it can remain the same
+
+
+
 
 
   return (

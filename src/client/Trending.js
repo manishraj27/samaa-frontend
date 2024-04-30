@@ -44,14 +44,14 @@ const Trending = () => {
   }, []);
 
   const navigateToPlayer = (id) => {
-    navigate("/player", { state: { id: id } });
+    navigate("/player", { state: { id: id, source: "saavn" } });
+    console.log('saavn playlist id:',id);
   };
 
   return (
     <div className="screen-container">
       <header className="header">
         <h1 className="header-title">Trending Playlists</h1>
-        <h1>Fetched From Saavn Api (Yet To Implement)</h1>
       </header>
       <div className="library-body">
         {loading ? (
