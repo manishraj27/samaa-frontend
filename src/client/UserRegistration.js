@@ -159,6 +159,8 @@ const UserRegistration = () => {
         <img src="12291063_Happy girl wearing headphones.svg" alt="User Registration" />
       </div> */}
     </div>
+
+    //https://github.com/manishraj27
   );
 };
 
