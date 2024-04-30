@@ -7,7 +7,8 @@ export default function About() {
   const data = [
     { id: 1, question: 'What is Samaa?', answer: 'Samaa is a platform for music streaming.' },
     { id: 2, question: 'What is tech stack used for developing Samaa?', answer: 'Samaa is MERN STACK PROJECT developed under our SDP 2' },
-    { id: 3, question: 'Team Members', answer: 'K Manish, Manish Raj, Mukund Maheswari' }
+    { id: 3, question: 'What features are there for Samaa Users?', answer: 'Users can search for new songs, play song, create, update and deleted playlist. They can fetch their spotify playlist. They have facility to listen trending songs fetched from saavn. ' },
+    { id: 4, question: 'Thank you for exploring Samaa!', answer: 'We are constantly striving to enhance your experience and bring you the best in music streaming. In the near future, we plan to implement exciting features and this project is will be updated regularly. Stay tuned for more updates!'},
   ];
 
   const handleRowClick = (id) => {
