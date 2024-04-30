@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import "./Library.css";
 import { IconContext } from "react-icons";
 import { AiFillPlayCircle } from "react-icons/ai";
-import { FaEllipsisV } from "react-icons/fa"; // Importing the three dots icon
+import { FaEllipsisV } from "react-icons/fa"; 
 import { useNavigate } from "react-router-dom";
 import CreatePlaylist from '../components/playlistForm/CreatePlaylist';
 import EditPlaylist from '../components/playlistForm/EditPlaylis';
@@ -23,7 +23,21 @@ const Library = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [showUpdateForm, setShowUpdateForm] = useState(false);
   const [selectedPlaylistId, setSelectedPlaylistId] = useState(null);
-  
+
+
+//**Navigating to player according to the playlist selected */
+  const navigateToPlayer = (id) => {
+    const params = new URLSearchParams(window.location.hash.substring(1));
+    const token = params.get("access_token");
+    if (token) {
+      navigate("/player", { state: { id: id, source: "spotify", accessToken: token } });
+    } else {
+      navigate("/player", { state: { id: id, source: "samma" } });
+    }
+  };
+
+
+  //**Fetching Our Own Playlist i.e Samaa Playlits**/
   const fetchSammaPlaylist = async () => {
     try {
       const response = await axios.get(`${config.samaa_api}/api/playlists/user-playlists`, {
@@ -49,18 +63,11 @@ const Library = () => {
     }
   };
 
+
+
+//**Fetching Samaa Playlists */
   const handleFetchPlaylists = () => {
     window.location = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&redirect_uri=${redirectUri}&scope=user-read-private%20playlist-read-private`;
-  };
-
-  const navigateToPlayer = (id) => {
-    const params = new URLSearchParams(window.location.hash.substring(1));
-    const token = params.get("access_token");
-    if (token) {
-      navigate("/player", { state: { id: id, source: "spotify", accessToken: token } });
-    } else {
-      navigate("/player", { state: { id: id, source: "samma" } });
-    }
   };
 
   const fetchPlaylists = async (token) => {

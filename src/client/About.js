@@ -6,7 +6,7 @@ export default function About() {
 
   const data = [
     { id: 1, question: 'What is Samaa?', answer: 'Samaa is a platform for music streaming.' },
-    { id: 2, question: 'What is tech stack?', answer: 'Samaa is MERN STACK PROJECT under our SDP 2' },
+    { id: 2, question: 'What is tech stack used for developing Samaa?', answer: 'Samaa is MERN STACK PROJECT developed under our SDP 2' },
     { id: 3, question: 'Team Members', answer: 'K Manish, Manish Raj, Mukund Maheswari' }
   ];
 

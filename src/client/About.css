@@ -25,9 +25,9 @@
 }
 
 .about-table tr:hover {
-  background-color: #a9cce3; /* Light blue background color on hover */
+  background-color: #008eec; /* Light blue background color on hover */
 }
 
 .about-table tr.expanded {
-  background-color: #85c1e9; /* Lighter blue background color for expanded row */
+  background-color: #3fa4e7; /* Lighter blue background color for expanded row */
 }
