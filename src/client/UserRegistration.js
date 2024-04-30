@@ -15,9 +15,10 @@ const UserRegistration = () => {
   const [errors, setErrors] = useState({});
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const schema = Joi.object({
-    name: Joi.string().min(5).max(10).required(),
+    name: Joi.string().min(4).max(20).required(),
     email: Joi.string().email({ tlds: { allow: false } }).required(),
     password: passwordComplexity().required(),
     gender: Joi.string().valid('male', 'female', 'non-binary').required()
@@ -28,7 +29,8 @@ const UserRegistration = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+    setLoading(true);
+
     const { error } = schema.validate(formData, { abortEarly: false });
     if (error) {
       const validationErrors = {};
@@ -37,6 +39,7 @@ const UserRegistration = () => {
       }
       setErrors(validationErrors);
       setErrorMessage(''); 
+      setLoading(false);
       return;
     }
     setErrorMessage('');
@@ -63,6 +66,8 @@ const UserRegistration = () => {
     } catch (error) {
       console.error('Registration failed:', error.response.data.message);
       setErrorMessage(error.response.data.message);
+    }finally {
+      setLoading(false);
     }
   };
   
@@ -131,11 +136,22 @@ const UserRegistration = () => {
               </div>
             </div>
 
-            <div id="submit-button-cvr">
-              <button id="submit-button" type="submit">Register</button>
+            
+
+          {loading ? (
+            <div id='submit-button-cvr'>
+              <button id="submit-button">Registering...</button>
             </div>
-          {successMessage && <div className="success-message">{successMessage}</div>}
-          {errorMessage && <div className="error-message">{errorMessage}</div>}
+            ) : (
+              <div id="submit-button-cvr">
+                <button id="submit-button" type="submit">Register</button>
+              </div>
+            )}
+
+            
+            {successMessage && <div className="success-message">{successMessage}</div>}
+            {errorMessage && <div className="error-message">{errorMessage}</div>}
+
           </div>
         </form>
       </div>
