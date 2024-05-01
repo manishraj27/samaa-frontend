@@ -140,7 +140,7 @@ export default function NewAudioPlayer({
           isPlaying={isPlaying}
           image={circleImage}
           size={300}
-          color="#C96850"
+          color="#83e5f2"
         />
       </div>
       <div className="player-right-body flex">
