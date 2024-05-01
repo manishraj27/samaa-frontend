@@ -1,0 +1,185 @@
+.grid {
+  display: grid;
+}
+
+.grid-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.grid-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+.gap-big {
+  gap: 2rem;
+}
+
+.gap-small {
+  gap: 1rem;
+}
+
+.margin-bottom {
+  margin-bottom: 1rem;
+}
+
+.margin-top-big {
+  margin-top: 2rem;
+}
+
+.font-large {
+  font-size: 1.875rem;
+  color: white;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.padding-big {
+  padding: 2rem;
+}
+
+.padding-small {
+  padding: 1rem;
+}
+
+.rounded {
+  border-radius: 0.5rem;
+}
+
+
+.bg-white {
+  background-color: #fff;
+}
+
+.bg-purple {
+  background-color: #8b5cf6;
+}
+
+.bg-red {
+  background-color: #ef4444;
+}
+
+.bg-green {
+  background-color: #10b981;
+}
+
+.bg-blue {
+  background-color: #3b82f6;
+}
+
+.bg-pink {
+  background-color: #ec4899;
+}
+
+.bg-zinc {
+  background-color: #d326bf;
+}
+
+.bg-indigo {
+  background-color: #6366f1;
+}
+
+.bg-yellow {
+  background-color: #fbbf24;
+}
+
+.bg-orange {
+  background-color: #4dd2e4;
+}
+
+
+.bg-light {
+  background-color: #00eeff;
+}
+
+.bg-dark-red {
+  background-color: #9b2c2c;
+}
+
+.bg-dark-blue {
+  background-color: #1e3a8a;
+}
+
+.bg-lightgreen {
+  background-color: #06ffb8;
+}
+
+.bg-dark-purple {
+  background-color: #4d0575;
+}
+
+
+
+.flex {
+  display: flex;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.margin-left-small {
+  margin-left: 0.5rem;
+}
+
+.text-red {
+  color: #ef4444;
+}
+
+.card {
+  position: relative;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  height: 100%;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card-image {
+  width: 100%;
+  height: 200px; /* Adjust as needed */
+  object-fit: cover;
+}
+
+.card-content {
+  padding: 1rem;
+  background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+  color: white;
+  height: calc(100% - 80px); /* Adjust as needed */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.card-description {
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+}
+
+.card-button {
+  background-color: #10b981;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.card-button:hover {
+  background-color: #059669;
+}
