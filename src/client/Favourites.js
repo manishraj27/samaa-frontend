@@ -36,7 +36,11 @@ export default function Favourites() {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className='screen-container'>
+        <header className="header">
+        <h1 className="header-title">Liked Songs Loading...</h1>
+      </header>
+    </div>;
   }
 
   if (error) {
@@ -45,7 +49,9 @@ export default function Favourites() {
 
   return (
     <div className='screen-container'>
-      <h2>Liked Songs</h2>
+      <header className="header">
+        <h1 className="header-title">Liked Songs</h1>
+      </header>
       <div className="library-body">
         {likedSongs.length > 0 ? (
           likedSongs.map((song) => (
