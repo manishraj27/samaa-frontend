@@ -80,7 +80,7 @@ export default function NewAudioPlayer({
       setCurrentIndex((prevIndex) => (prevIndex + 1) % total.length);
     }
   };
-  
+
 
   const handlePrev = () => {
     setCurrentIndex((prevIndex) => (prevIndex === 0 ? total.length - 1 : prevIndex - 1));
@@ -160,7 +160,7 @@ export default function NewAudioPlayer({
       console.log("Shuffled indexes: ", indexes);
     }
   };
-  
+
 
   useEffect(() => {
     const handleAudioEnd = () => {
@@ -171,14 +171,14 @@ export default function NewAudioPlayer({
         });
       }
     };
-  
+
     audioRef.current.addEventListener('ended', handleAudioEnd);
-  
+
     return () => {
       audioRef.current.removeEventListener('ended', handleAudioEnd);
     };
   }, [isRepeat]);
-  
+
 
 
   return (
@@ -194,10 +194,21 @@ export default function NewAudioPlayer({
       </div>
       <div className="player-right-body flex">
         <p className="song-title">{total[currentIndex]?.name}</p>
+            <WaveAnimation isPlaying={isPlaying} />
         <div className="player-right-bottom flex">
           <div className="song-duration flex">
             <p className="duration">{formatTime(Math.round(trackProgress))}</p>
-            <WaveAnimation isPlaying={isPlaying} />
+            <input
+              type="range"
+              min="0"
+              max={duration}
+              value={trackProgress}
+              onChange={(e) => {
+                setTrackProgress(parseFloat(e.target.value));
+                audioRef.current.currentTime = parseFloat(e.target.value);
+              }}
+              className="seek-bar"
+            />
             <p className="duration">{formatDuration(duration)}</p>
           </div>
           <Controls

@@ -54,3 +54,36 @@
     margin: 0;
     color: #c4d0e3;
   }
+
+
+
+
+  .seek-bar {
+    width: 70%;
+    height: 10px;
+    margin: 0 15px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: #9aa5b75f;
+    border-radius: 5px;
+    outline: none;
+  }
+  
+  .seek-bar::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: #83e5f2;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
+  .seek-bar::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: #83e5f2;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
