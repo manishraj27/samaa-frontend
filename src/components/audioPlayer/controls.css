@@ -38,3 +38,26 @@
   .play-pause-btn:hover {
     transform: scale(1.1);
   }
+
+
+/*shuffle and repeat */
+  .shuffle-btn,
+.repeat-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 20px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.shuffle-btn:hover,
+.repeat-btn:hover {
+  transform: scale(1.1);
+}
+
+.shuffle-btn.active:hover,
+.repeat-btn.active:hover {
+  transform: scale(1.1);
+}

@@ -11,13 +11,17 @@ export default function NewAudioPlayer({
 }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [trackProgress, setTrackProgress] = useState(0);
+  const [isRepeat, setIsRepeat] = useState(false);
+  const [isShuffle, setIsShuffle] = useState(false);
+  const [shuffledIndexes, setShuffledIndexes] = useState([]);
+
 
   const audioRef = useRef(new Audio());
   const intervalRef = useRef();
   const isReady = useRef(false);
 
   useEffect(() => {
-    
+
     const setAudioSource = () => {
       if (total[currentIndex]?.downloadUrl) {
         // Saavn song
@@ -26,9 +30,9 @@ export default function NewAudioPlayer({
         // Samaa song
         audioRef.current.src = total[currentIndex]?.song;
       }
-      
+
     };
-  
+
     setAudioSource();
 
     const onCanPlayThrough = () => {
@@ -69,8 +73,14 @@ export default function NewAudioPlayer({
   };
 
   const handleNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % total.length);
+    if (isShuffle) {
+      const nextIndex = shuffledIndexes[(shuffledIndexes.indexOf(currentIndex) + 1) % total.length];
+      setCurrentIndex(nextIndex);
+    } else {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % total.length);
+    }
   };
+  
 
   const handlePrev = () => {
     setCurrentIndex((prevIndex) => (prevIndex === 0 ? total.length - 1 : prevIndex - 1));
@@ -111,26 +121,65 @@ export default function NewAudioPlayer({
 
   const formatDuration = (duration) => {
     if (isNaN(duration) || duration === 0) return "0:00";
-  
+
     const minutes = Math.floor(duration / 60);
     const seconds = Math.floor(duration % 60);
-  
+
     return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
   };
-  
+
   const { duration } = audioRef.current;
   const currentPercentage = duration ? (trackProgress / duration) * 100 : 0;
 
   let circleImage;
-  if(total[currentIndex]?.img){
+  if (total[currentIndex]?.img) {
     circleImage = total[currentIndex]?.img;
   }
-  else if(total[currentIndex]?.image && total[currentIndex]?.image.length > 2){
+  else if (total[currentIndex]?.image && total[currentIndex]?.image.length > 2) {
     circleImage = total[currentIndex]?.image[2]?.url;
   }
-  else{
+  else {
     circleImage = "/frontendapp/samaa/public/default_image_url.png";
   }
+
+
+  const toggleRepeat = () => {
+    setIsRepeat(!isRepeat);
+  };
+
+  const toggleShuffle = () => {
+    setIsShuffle(!isShuffle);
+    if (!isShuffle) {
+      // Create shuffled indexes when shuffle is activated
+      const indexes = total.map((_, index) => index);
+      for (let i = indexes.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [indexes[i], indexes[j]] = [indexes[j], indexes[i]];
+      }
+      setShuffledIndexes(indexes);
+      console.log("Shuffled indexes: ", indexes);
+    }
+  };
+  
+
+  useEffect(() => {
+    const handleAudioEnd = () => {
+      if (isRepeat) {
+        audioRef.current.currentTime = 0;
+        audioRef.current.play().catch(error => {
+          console.error('Error: play() failed:', error);
+        });
+      }
+    };
+  
+    audioRef.current.addEventListener('ended', handleAudioEnd);
+  
+    return () => {
+      audioRef.current.removeEventListener('ended', handleAudioEnd);
+    };
+  }, [isRepeat]);
+  
+
 
   return (
     <div className="player-body flex">
@@ -153,10 +202,14 @@ export default function NewAudioPlayer({
           </div>
           <Controls
             isPlaying={isPlaying}
-            setIsPlaying={setIsPlaying} // Correct prop name
+            setIsPlaying={setIsPlaying}
             handleNext={handleNext}
             handlePrev={handlePrev}
             total={total}
+            toggleRepeat={toggleRepeat}
+            toggleShuffle={toggleShuffle}
+            isRepeat={isRepeat}
+            isShuffle={isShuffle}
           />
         </div>
       </div>

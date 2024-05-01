@@ -164,12 +164,6 @@ useEffect(() => {
   fetchSaavnPlaylist();
 }, [location.state]);
 
-// No need to modify the return statement, it can remain the same
-
-
-
-
-
   return (
     <div className="screen-container flex">
       <div className="left-player-body">
