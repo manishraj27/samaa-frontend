@@ -11,7 +11,7 @@ Welcome to Samaa, a music streaming web application built using the MERN (MongoD
 - **Create Playlists**: Users can create and manage their playlists.
 - **Like Songs**: Users can like their favorite songs and access them easily.
 - **Search Functionality**: Search for specific songs or artists.
-
+- **Fetching Songs from Saavn**: We sourcing our trending and feed pages songs from this [https://saavn.dev/](https://saavn.dev/)
 ## Technologies Used
 
 - **React.js**: Frontend JavaScript library for building user interfaces.
