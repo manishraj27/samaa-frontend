@@ -22,3 +22,25 @@
 
 
 
+.footer-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer-text {
+  font-size: 16px;
+  margin-top: 10px;
+  color: #2e2e2e;
+  font-family: Arial, sans-serif; /* Adjust font family as needed */
+}
+
+.footer-link {
+  text-decoration: none;
+  color: #460064; /* Adjust link color as needed */
+  transition: color 0.3s ease; /* Add transition effect for smoother color change */
+}
+
+.footer-link:hover {
+  color: #0056b3; /* Adjust link color on hover */
+}

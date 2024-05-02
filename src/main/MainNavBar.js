@@ -9,6 +9,7 @@ import About from './../client/About';
 import EmailVerify from '../components/emailVerify/EmailVerify';
 import EmailVerificationSuccessfullPage from '../components/emailVerify/EmailVerificationSuccessfullPage';
 import MainErrorPage from './MainErrorPage';
+import Instructions from './Instructions';
 
 export default function MainNavBar({ onAdminLogin, onUserLogin }) {
   return (
@@ -24,6 +25,7 @@ export default function MainNavBar({ onAdminLogin, onUserLogin }) {
         <Routes>
           <Route path="/" element={<MainHome />} />
           <Route path="/mainhome" element={<MainHome />} />
+          <Route path="/instructions" element={<Instructions />} />
           <Route path="/userregistration" element={<UserRegistration />} />
           <Route path="/userlogin" element={<UserLogin onUserLogin={onUserLogin} />} />
           <Route path="/adminlogin" element={<AdminLogin onAdminLogin={onAdminLogin} />} />

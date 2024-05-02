@@ -1,0 +1,19 @@
+.instructions {
+    padding: 20px;
+    color: #fff;
+  }
+  
+.instructions h2 {
+    font-size: 30px;
+    margin-bottom: 10px;
+  }
+  
+.instructions ul {
+    list-style-type: disc;
+  }
+  
+.instructions li {
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+  
