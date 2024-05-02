@@ -2,7 +2,7 @@
 
 Welcome to Samaa, a music streaming web application built using the MERN (MongoDB, Express.js, React.js, Node.js) stack.
 
-![Screenshot (562).png](https://drive.google.com/file/d/1Mbocs2_o_KcpOKAkMAgUq93jd0pa6hBL/view?usp=drive_link)
+![Screenshot (562)](https://github.com/manishraj27/samaa-frontend/assets/77354587/fa7f45e7-5e84-4444-9375-4a6647f06d72)
 
 ## Features
 
@@ -29,6 +29,9 @@ To get started with Samaa, follow these steps:
 4. Start the development server: `npm start`
 5. Open your browser and navigate to `http://localhost:3000` to view the application.
 
+## Prototype (Figma) 
+
+The prototype made in figma. Visit to check the prototype. [Click On the Link](https://www.figma.com/community/file/1334999908821817060/samaa-music-streaming-website)
 ## Deployment
 
 The frontend of Samaa is deployed on Vercel. Visit [Samaa Music Streaming App](https://samavibes.vercel.app/) to access the live version of the application.
