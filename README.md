@@ -36,6 +36,12 @@ The prototype made in figma. Visit to check the prototype. [Click On the Link](h
 
 The frontend of Samaa is deployed on Vercel. Visit Samaa Music Streaming App to access the live version of the application. [https://samavibes.vercel.app](https://samavibes.vercel.app)
 
+## Website 
+![Screenshot (563)](https://github.com/manishraj27/samaa-frontend/assets/77354587/62278b85-455e-445f-bc91-40bba86320e1)
+![Screenshot (567)](https://github.com/manishraj27/samaa-frontend/assets/77354587/1c396c42-9844-4414-baca-fd2283b45b72)
+![Screenshot (568)](https://github.com/manishraj27/samaa-frontend/assets/77354587/bc322ebc-a22d-41c8-b282-1b252f715eea)
+
+
 ## Contributing
 
 We welcome contributions from the community to enhance and improve the Samaa Music Streaming App frontend. If you have any suggestions, feedback, or would like to report an issue, please open an issue or submit a pull request on GitHub.
