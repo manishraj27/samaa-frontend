@@ -2,7 +2,7 @@
 
 Welcome to Samaa, a music streaming web application built using the MERN (MongoDB, Express.js, React.js, Node.js) stack.
 
-![Samaa Music Streaming App](https://drive.google.com/file/d/1Mbocs2_o_KcpOKAkMAgUq93jd0pa6hBL/view?usp=sharing)
+![Samaa Landing Page](https://drive.google.com/file/d/1Mbocs2_o_KcpOKAkMAgUq93jd0pa6hBL/view?usp=drive_link)
 
 ## Features
 
