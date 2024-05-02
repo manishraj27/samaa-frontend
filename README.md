@@ -48,7 +48,7 @@ We welcome contributions from the community to enhance and improve the Samaa Mus
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](link-to-license-file) file for details.
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/manishraj27/samaa-frontend/blob/main/LICENSE) file for details.
 
 ## Acknowledgements
 
