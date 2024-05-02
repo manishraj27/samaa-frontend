@@ -34,7 +34,7 @@ To get started with Samaa, follow these steps:
 The prototype made in figma. Visit to check the prototype. [Click On the Link](https://www.figma.com/community/file/1334999908821817060/samaa-music-streaming-website)
 ## Deployment
 
-The frontend of Samaa is deployed on Vercel. Visit [Samaa Music Streaming App](https://samavibes.vercel.app/) to access the live version of the application.
+The frontend of Samaa is deployed on Vercel. Visit Samaa Music Streaming App to access the live version of the application. [https://samavibes.vercel.app](https://samavibes.vercel.app)
 
 ## Contributing
 
