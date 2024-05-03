@@ -45,7 +45,7 @@ export default function Search({ authToken }) {
           type="text"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          placeholder="Search something"
+          placeholder="Search for songs..."
         />
         <button className="searchButton" onClick={handleSearch} disabled={!searchQuery || loading}>
           {loading ? 'Searching...' : (
