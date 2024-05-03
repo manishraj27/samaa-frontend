@@ -50,8 +50,6 @@ We welcome contributions from the community to enhance and improve the Samaa Mus
 
 This project is licensed under the MIT License - see the [LICENSE](https://github.com/manishraj27/samaa-frontend/blob/main/LICENSE) file for details.
 
-## Acknowledgements
+## Backend
 
-We would like to acknowledge the contributions of all developers and contributors who have helped to build and maintain the Samaa Music Streaming App frontend.
-
-Thank you for using the Samaa Music Streaming App! Enjoy streaming your favorite music! 🎶🎧
+The backend of this project can be found here - [Samaa-Backend](https://github.com/manishraj27/samaa-backend)
