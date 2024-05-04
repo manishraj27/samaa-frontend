@@ -4,15 +4,16 @@ import { useNavigate } from "react-router-dom";
 import "./AdminLogin.css";
 import config from "../config";
 
-export default function AdminLogin({onAdminLogin}) {
+export default function AdminLogin({ onAdminLogin }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     try {
       const response = await axios.post(`${config.samaa_api}/api/login/`, {
@@ -30,6 +31,8 @@ export default function AdminLogin({onAdminLogin}) {
       navigate("/adminhome");
     } catch (error) {
       setError(error.message || "Invalid email or password");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -64,14 +67,14 @@ export default function AdminLogin({onAdminLogin}) {
               </div>
             </div>
             <div id="submit-button-cvr">
-              <button id="submit-button" type="submit">
-                Login
+              <button id="submit-button" type="submit" disabled={loading}> {/* Disable button when loading */}
+                {loading ? 'Logging in...' : 'Login'} {/* Display loading state text */}
               </button>
             </div>
             {/* <div id="forgot-pass">
               <a href="#">Forgot password?</a>
             </div> */}
-        {error && <div className="error-message">{error}</div>}
+            {error && <div className="error-message">{error}</div>}
           </div>
         </form>
       </div>
