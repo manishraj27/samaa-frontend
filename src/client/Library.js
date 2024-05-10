@@ -10,7 +10,7 @@ import CreatePlaylist from '../components/playlistForm/CreatePlaylist';
 import EditPlaylist from '../components/playlistForm/EditPlaylis';
 import config from '../config';
 
-const clientId = "9de33fca64244882a06ddec17de75c7e";
+const clientId = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
 const redirectUri = `https://samavibes.vercel.app/library`;
 
 const Library = () => {
