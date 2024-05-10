@@ -5,6 +5,7 @@
 /.pnp
 .pnp.js
 
+.env
 # testing
 /coverage
 
@@ -23,5 +24,3 @@ yarn-debug.log*
 yarn-error.log*
 
 
-
-.env
