@@ -57,7 +57,7 @@ export default function SideBar() {
         <SideBarButton title="Log Out" onClick={handleLogout} icon={<PiSignOutBold />} />
         <div className="footer-container">
           <p className="footer-text">Developed with <span role="img" aria-label="heart">❤️</span></p>
-          <p className="footer-text"><a href='https://github.com/manishraj27' className="footer-link">By Mishu</a></p>
+          <p className="footer-text"><a href='https://manishraj.me' className="footer-link">By Mishu</a></p>
         </div>
       </div>
     </div>
