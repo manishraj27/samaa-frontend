@@ -80,6 +80,7 @@ const UserRegistration = () => {
             <div id="welcome-lines">
               <div id="welcome-line-1">Samaa</div>
               <div id="welcome-line-2">Welcome!</div>
+              <div id="welcome-line-2">Use your original gmail only.</div>
             </div>
             <div id="input-area">
               <div className="form-inp">
