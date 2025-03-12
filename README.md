@@ -4,6 +4,10 @@ Welcome to Samaa, a music streaming web application built using the MERN (MongoD
 
 ![Screenshot (562)](https://github.com/manishraj27/samaa-frontend/assets/77354587/fa7f45e7-5e84-4444-9375-4a6647f06d72)
 
+## Backend
+
+The backend of this project can be found here - [Samaa-Backend](https://github.com/manishraj27/samaa-backend)
+
 ## Features
 
 - **User Authentication**: Allow users to sign up, log in, and log out securely.
@@ -50,6 +54,4 @@ We welcome contributions from the community to enhance and improve the Samaa Mus
 
 This project is licensed under the MIT License - see the [LICENSE](https://github.com/manishraj27/samaa-frontend/blob/main/LICENSE) file for details.
 
-## Backend
 
-The backend of this project can be found here - [Samaa-Backend](https://github.com/manishraj27/samaa-backend)
